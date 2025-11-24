@@ -104,3 +104,13 @@ class ForwardsDeposit:
         next_disc_factor = prev_disc_factor / (1 + frate * delt)
 
         return next_disc_factor
+    
+
+
+def bootstrap_curve(spot, instruments):
+    curve = DiscountCurve(spot)
+    # sort by final maturity
+    instruments_sorted = sorted(instruments, key=lambda inst: inst.maturity_date)
+    for inst in instruments_sorted:
+        inst.add_to_curve(curve)
+    return curve
