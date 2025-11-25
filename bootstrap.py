@@ -105,6 +105,14 @@ class ForwardsDeposit:
 
         return next_disc_factor
     
+    def get_spot_rate(self, disc_factor, spot_date):
+        
+        delt = yearfrac(spot_date, self.maturity_date)
+        spot_rate = (1 / disc_factor - 1)/ delt
+        # print("discount factor: ", disc_fact)
+        # print("delt: ", delt)
+        return spot_rate
+    
 
 
 def bootstrap_curve(spot, instruments):
